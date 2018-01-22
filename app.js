@@ -8,6 +8,7 @@ var lessMiddleware = require('less-middleware');
 var session = require('express-session')
 var exphbs = require('express-handlebars')
 var csrf = require('csurf')
+var helmet = require('helmet')
 
 var users = require('./routes/users');
 var auth = require('./routes/auth');
@@ -35,7 +36,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // - cookie config
 var sess = {
   secret: 'keyboard cat',
-  cookie: {},
+  cookie: {
+    httpOnly: true
+  },
   saveUninitialized: false,
   resave: false
 }
@@ -56,7 +59,10 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-
+// adding helment
+app.use(helmet({
+  frameguard: {action: 'deny'}
+}))
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

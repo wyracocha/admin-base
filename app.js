@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var lessMiddleware = require('less-middleware');
 var session = require('express-session')
 var exphbs = require('express-handlebars')
+var csrf = require('csurf')
 
 var users = require('./routes/users');
 var auth = require('./routes/auth');
@@ -44,10 +45,11 @@ if (app.get('env') === 'production') {
 }
 app.use(session(sess))
 // - end cookie config
-
-app.use('/', auth)
+// - csrf
+app.use(csrf({ cookie: true }));
+// - end csrf
 app.use('/users', users);
-
+app.use('/', auth)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

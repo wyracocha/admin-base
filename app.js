@@ -6,15 +6,22 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var lessMiddleware = require('less-middleware');
 var session = require('express-session')
+var exphbs = require('express-handlebars')
 
-var index = require('./routes/index');
 var users = require('./routes/users');
-
+var auth = require('./routes/auth');
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+// hbs config
+app.engine('.hbs', exphbs({
+  extname: '.hbs',
+  layoutsDir: 'views/layouts',
+  partialsDir: 'views/partials',
+  defaultLayout: 'layout'
+}));
+app.set('view engine', '.hbs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -38,7 +45,7 @@ if (app.get('env') === 'production') {
 app.use(session(sess))
 // - end cookie config
 
-app.use('/', index);
+app.use('/', auth)
 app.use('/users', users);
 
 // catch 404 and forward to error handler

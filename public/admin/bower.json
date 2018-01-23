@@ -1,0 +1,21 @@
+{
+  "name": "admin",
+  "authors": [
+    "Miguel Aliaga <miguel@uorboros.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "eonasdan-bootstrap-datetimepicker": "^4.17.47",
+    "admin-lte": "^2.4.2"
+  }
+}

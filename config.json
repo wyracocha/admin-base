@@ -1,0 +1,8 @@
+{
+  "development": {
+    "PORT": 3001,
+    "SECRET": "2'141´234230493'209402'34",
+    "ADMIN_EMAIL": "maliaga.pantoja@gmail.com",
+    "ADMIN_PASSWORD": "qwerty"
+  }
+}
